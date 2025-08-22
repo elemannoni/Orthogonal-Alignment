@@ -52,14 +52,14 @@ def apply_Q(model, Q_dict):
 
 def apply_Q_layerwise(model1, model2, train_dataloader1, train_dataloader2, alpha=0.7, m=True):
     #Applica  Q considerando anche come sono stati modificati precedentemente gli altri layer
-  
+    
     if m:
       m1 = model1
       al_model = copy.deepcopy(model2)
     else:
       m1 = model2
       al_model = copy.deepcopy(model1)
-
+        
     x = next(iter(train_dataloader2))["x"].float()
     prev_Q = None
 
@@ -74,9 +74,12 @@ def apply_Q_layerwise(model1, model2, train_dataloader1, train_dataloader2, alph
         if layer.bias.data is not None:
           layer.bias.data = alpha * (Q @ layer.bias.data) + (1 - alpha) * layer.bias.data
         prev_Q = Q
+
         diff = torch.norm(A - B @ Q, 'fro')
+        ortho_err = torch.norm(Q.T @ Q - torch.eye(Q.shape[0], device=Q.device)).item()
+        det = torch.det(Q).item()
         print(f'Layer {i} matching error: {diff.item()}')
-        print(torch.allclose(Q.T @ Q, torch.eye(Q.shape[0]), atol=1e-5))
+        print(f"Layer {i} ortho_err: {ortho_err:.2e} -> Q is orthogonal: {torch.allclose(Q.T @ Q, torch.eye(Q.shape[0]), atol=1e-5)}")
       x = layer(x)
 
     return al_model
