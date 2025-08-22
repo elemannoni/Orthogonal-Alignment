@@ -35,6 +35,7 @@ def create_dataloaders(seed1=42, seed2=394, batch_size=32):
   for i in range(len(y)):
     pairs.append((x[i], y[i]))
 
+  torch.manual_seed(2019)
   pairs  = random.shuffle(pairs)
   test = pairs[int(len(pairs)*0.9):]
   pairs = pairs[:int(len(pairs)*0.9)]
