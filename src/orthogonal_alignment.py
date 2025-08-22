@@ -51,7 +51,7 @@ def apply_Q(model, Q_dict):
     return al_model
 
 def apply_Q_layerwise(model1, model2, train_dataloader1, train_dataloader2, alpha=0.7, m=True):
-    #applica Q ai layer ma considerando le Q precendenti
+    #Applica  Q considerando anche come sono stati modificati precedentemente gli altri layer
   
     if m:
       m1 = model1
