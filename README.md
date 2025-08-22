@@ -14,15 +14,15 @@ In questo progetto si cerca di estendere l'allineamento dei pesi di due modelli 
 │── README.md # documentazione<br>
 
 **src**
-  • dataset.py =  definzione della classe dei dataset
-                  download dei dataset e creazione dei DataLoader
-  • models.py = definzione della classe dei modelli
-  • train.py = funzione per il loop di training
-  • tests.py = funzione per valutare la loss di test
-               funzioni per chek sulla correttezza del modello
-  • merge.py = funzioni per SLERP e LERP
-  • analysis.py = analisi non linearità
-                  cycle consistency
-                  geometria dello spazio
+  • dataset.py =  definzione della classe dei dataset<br>
+                  download dei dataset e creazione dei DataLoader<br>
+  • models.py = definzione della classe dei modelli<br>
+  • train.py = funzione per il loop di training<br>
+  • tests.py = funzione per valutare la loss di test<br>
+               funzioni per chek sulla correttezza del modello<br>
+  • merge.py = funzioni per SLERP e LERP<br>
+  • analysis.py = analisi non linearità<br>
+                  cycle consistency<br>
+                  geometria dello spazio<br>
 
 
