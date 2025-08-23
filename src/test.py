@@ -14,9 +14,9 @@ def evaluate_model(model, dataloader):
 
     with torch.no_grad():
       for batch in dataloader:
-        x = batch["x"]
-        y = batch["y"]
-        y_pred = model(x).to("cpu")
+        x = batch["x"].to(device)
+        y = batch["y"].to(device)
+        y_pred = model(x)
         loss = loss_fn(y_pred, y)
         total_loss += loss.item()
         n_batches += 1
