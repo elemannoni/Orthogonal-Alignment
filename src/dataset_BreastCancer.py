@@ -49,10 +49,9 @@ def create_dataloaders(seed=2019, batch_size=32):
   pairs = pairs[:int(len(pairs)*0.9)]
 
   #val e train dataloader per il primo modello
-  #torch.manual_seed(seed1)
-  pairs1 = random.sample(pairs, k = len(pairs))
-  train = pairs1[:int(len(pairs1)*0.8)]
-  val = pairs1[int(len(pairs1)*0.8):]
+  random.shuffle(pairs)
+  train = pairs[:int(len(pairs)*0.8)]
+  val = pairs[int(len(pairs)*0.8):]
   
   train_dataset1 = SpecDataset(train)
   val_dataset1 = SpecDataset(val)
@@ -64,10 +63,9 @@ def create_dataloaders(seed=2019, batch_size=32):
   val_dataloader1 = torch.utils.data.DataLoader(val_dataset1, batch_size=batch_size, shuffle=False, num_workers=2, drop_last=True)
 
   #val e train dataloader per il secondo modello
-  #torch.manual_seed(seed2)
-  pairs2 = random.sample(pairs, k = len(pairs))
-  train = pairs2[:int(len(pairs2)*0.8)]
-  val = pairs2[int(len(pairs2)*0.8):int(len(pairs2)*0.9)]
+  random.shuffle(pairs)
+  train = pairs[:int(len(pairs)*0.8)]
+  val = pairs[int(len(pairs)*0.8):]
   
   train_dataset2 = SpecDataset(train)
   val_dataset2 = SpecDataset(val)
