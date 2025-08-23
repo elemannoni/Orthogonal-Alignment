@@ -13,7 +13,7 @@ In questo progetto si cerca di estendere l'allineamento dei pesi di due modelli 
 │── README.md # documentazione<br>
 
 Link per aprire i notebook in Colab:<br>
-Main notebook: [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elemannoni/Orthogonal-Alignment/blob/main/Orthogonal_alignment_notebook.ipynb)
+Main notebook: [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elemannoni/Orthogonal-Alignment/blob/main/Orthogonal_Alignment_notebook.ipynb)
 
 **src**<br>
   • dataset.py =  definzione della classe dei dataset, download dei dataset e creazione dei DataLoader<br>
