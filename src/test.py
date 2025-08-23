@@ -72,3 +72,32 @@ def cycle_consistency_ABC(model_A, model_B, model_C, train_dataloaderA, train_da
         W_AC = model_AC.fc[i].weight.data
         diff = torch.norm(W_ABC - W_AC)
         print(f"Layer {i} ABC vs AC error: {diff.item()}")
+
+def misalignment_ReLU(model1, al_model, dataloader, Q_list, linear_layers):
+    model1.eval()
+    al_model.eval()
+    misalignments = []
+    before_ReLU = []
+
+    linear_layers = [i for i, layer in enumerate(model1.fc) if isinstance(layer, torch.nn.Linear)]
+
+    for idx, layer_idx in enumerate(linear_layers):
+        A = activation_matrix(model1, dataloader, layer_idx) 
+        B = activation_matrix(al_model, dataloader, layer_idx) 
+
+        Q = Q_list[layer_idx]
+        AQ = A @ Q  #applico Q alla matrice di attivazione prima della ReLU
+
+        before_reLU = (torch.norm(AQ-B, p = "fro")/A.shape[0])
+
+        #applico le ReLU
+        AQ_relu = F.relu(AQ)
+        B_relu = F.relu(B)
+
+        # Misalignment: differenza tra i due layer una volta applicata la ReLU
+        misalignment = torch.norm(AQ_relu - B_relu, p="fro") / A.shape[0]
+        misalignments.append(misalignment.item())
+        print(f"Layer {layer_idx} misalignment before ReLU: {before_reLU:.4f}")
+        print(f"Layer {layer_idx} misalignment after ReLU: {misalignment.item():.4f}")
+
+    return before_ReLU, misalignments
