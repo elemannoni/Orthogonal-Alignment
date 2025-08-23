@@ -55,11 +55,11 @@ def cycle_consistency_ABA(model_A, model_B, train_dataloaderA, train_dataloaderB
     model_ABA, Q_dictBA = apply_Q_layerwise(model_A, model_AB, train_dataloaderA, train_dataloaderB, 0.8) #allineo i pesi del modello ottenuto ad A
   
     for i, layer in enumerate(model_A.fc):
-    if isinstance(layer, nn.Linear):
-      W_A = layer.weight.data
-      W_ABA = model_ABA.fc[i].weight.data
-      diff = torch.norm(W_A - W_ABA)
-      print(f"Layer {i} ABA error: {diff.item()}")
+        if isinstance(layer, nn.Linear):
+          W_A = layer.weight.data
+          W_ABA = model_ABA.fc[i].weight.data
+          diff = torch.norm(W_A - W_ABA)
+          print(f"Layer {i} ABA error: {diff.item()}")
 
 def cycle_consistency_ABC(model_A, model_B, model_C, train_dataloaderA, train_dataloaderB, train_dataloaderC):
     model_AB, Q_dict_AB = apply_Q_layerwise(model_B, model_A, train_dataloaderB, train_dataloaderA, 0.8) #allineo i pesi di A a B
