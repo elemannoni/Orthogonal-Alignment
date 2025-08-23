@@ -4,6 +4,9 @@ import torch.nn.functional as F
 
 
 def evaluate_model(model, dataloader):
+    """
+    valuta il modello sul dataloader con la Cross Entropy
+    """
     model.eval()
     loss_fn = torch.nn.CrossEntropyLoss()
     total_loss = 0.0
@@ -20,19 +23,6 @@ def evaluate_model(model, dataloader):
 
     avg_loss = total_loss / n_batches
     return avg_loss
-  
-def confusion_matrix(model, dataloader, device):
-    model.eval()
-    ys = []; preds = []
-    with torch.no_grad():
-        for batch in dataloader:
-            x = batch["x"].to(device)
-            y = batch["y"].to(device)
-            ys.append(y.cpu().numpy())
-            preds.append(model(x).argmax(dim=1).cpu().numpy())
-    ys = np.concatenate(ys)
-    preds = np.concatenate(preds)
-    print(confusion_matrix(ys, preds))
 
 def misalignment_ReLU(model1, al_model, dataloader, Q_list, linear_layers):
     model1.eval()
