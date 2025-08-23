@@ -1,7 +1,9 @@
 import torch
 
 def Q_min_quadrati(A, B, alpha=False):
-    #che minimizza ||A - QB||_F
+    """
+    trova Q che minimizza ||A - QB||_F
+    """
   
     M = B.T @ A          # dimensione: (d, d)
     U, _, Vt = torch.linalg.svd(M, full_matrices=False)
@@ -9,6 +11,9 @@ def Q_min_quadrati(A, B, alpha=False):
     return Q
 
 def activation_matrix(model, dataloader, layer_num, device="cpu"):
+    """
+    Calcola la matrici di attivazione per un determinato layer
+    """
     model.eval()
     activations_list = []
     with torch.no_grad():
@@ -25,7 +30,9 @@ def activation_matrix(model, dataloader, layer_num, device="cpu"):
     return A
 
 def apply_Q(model, Q_dict):
-    #applica Q per ogni layer senza considerare i precedenti
+    """
+    applica Q per ogni layer senza considerare i precedenti
+    """
   
     al_model = copy.deepcopy(model)
     prev_Q = None
@@ -51,8 +58,9 @@ def apply_Q(model, Q_dict):
     return al_model
 
 def apply_Q_layerwise(model1, model2, train_dataloader1, train_dataloader2, alpha=0.7, m=True):
-    #Applica  Q considerando anche come sono stati modificati precedentemente gli altri layer
-    
+    """
+    Applica  Q considerando anche come sono stati modificati precedentemente gli altri layer
+    """
     if m:
       m1 = model1
       al_model = copy.deepcopy(model2)
