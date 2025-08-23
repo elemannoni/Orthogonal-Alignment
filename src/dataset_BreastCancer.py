@@ -39,7 +39,7 @@ def create_dataloaders(seed=2019, batch_size=32):
     pairs.append((x[i], y[i]))
 
   torch.manual_seed(seed)
-  pairs  = random.shuffle(pairs)
+  random.shuffle(pairs)
   test = pairs[int(len(pairs)*0.9):]
   
   #test dataloader 
