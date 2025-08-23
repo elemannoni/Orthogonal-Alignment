@@ -3,6 +3,9 @@ import math
 import copy
 
 def lerp_models(model_a, model_b, t):
+    """
+    Interpolazione lineare tra model_a e model_b
+    """
     new_model = copy.deepcopy(model_a) #per non modificare l'originale
 
     #interpolazione lineare
@@ -12,6 +15,9 @@ def lerp_models(model_a, model_b, t):
     return new_model
 
 def slerp_models(model_a, model_b, t, eps=1e-7):
+    """
+    Interpolazione sferica tra model_a e model_b
+    """
     new_model = copy.deepcopy(model_a)
 
     for key in new_model.state_dict().keys():
