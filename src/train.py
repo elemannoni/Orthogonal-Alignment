@@ -1,7 +1,7 @@
 import torch
 from tqdm import tqdm
 
-def train_loop(train_dataloader, val_dataloader, model, loss_fn, optimizer, epochs, tr_losses, val_losses):
+def train_loop(train_dataloader, val_dataloader, model, loss_fn, optimizer, scheduler, epochs, tr_losses, val_losses):
   for epoch in range(epochs):
     model.eval()
     val_loss = 0
@@ -29,6 +29,7 @@ def train_loop(train_dataloader, val_dataloader, model, loss_fn, optimizer, epoc
       optimizer.zero_grad()
       loss.backward()
       optimizer.step()
+      scheduler.step()
 
       train_loss += loss.item()
     tr_losses.append(train_loss/len(train_dataloader))
