@@ -73,8 +73,20 @@ def create_dataloaders(seed=2019, batch_size=32):
   g2 = torch.Generator()
   g2.manual_seed(seed)
 
-  
   train_dataloader2 = torch.utils.data.DataLoader(train_dataset2, batch_size=batch_size, shuffle=True, generator=g2, num_workers=2)
   val_dataloader2 = torch.utils.data.DataLoader(val_dataset2, batch_size=batch_size, shuffle=False, num_workers=2, drop_last=True)
 
-  return (train_dataloader1, val_dataloader1), (train_dataloader2, val_dataloader2), test_dataloader
+  random.shuffle(pairs)
+  train = pairs[:int(len(pairs)*0.8)]
+  val = pairs[int(len(pairs)*0.8):]
+  
+  train_dataset3 = SpecDataset(train)
+  val_dataset3 = SpecDataset(val)
+  
+  g3 = torch.Generator()
+  g3.manual_seed(seed)
+  
+  train_dataloader3 = torch.utils.data.DataLoader(train_dataset3, batch_size=32, shuffle=True, generator = g3, num_workers=2)
+  val_dataloader3 = torch.utils.data.DataLoader(val_dataset3, batch_size=32, shuffle=False, num_workers=2, drop_last=True)
+
+  return (train_dataloader1, val_dataloader1), (train_dataloader2, val_dataloader2), test_dataloader, (train_dataloader3, val_dataloader3)
