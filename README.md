@@ -9,6 +9,7 @@ In questo progetto si cerca di estendere l'allineamento dei pesi di due modelli 
 │ ├── tests.py<br>
 │ ├── merge.py<br>
 │ ├── analysis.py<br>
+│── Orthogonal_Alignment_notebook.ipynb # notebook principale del progetto<br>
 │── requirements.txt # librerie Python<br>
 │── README.md # documentazione<br>
 
