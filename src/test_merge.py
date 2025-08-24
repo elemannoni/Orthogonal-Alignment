@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 import numpy as np
-from merge import lerp_models, slerp_models
-from test import evaluate_model
+from .merge import lerp_models, slerp_models
+from .test import evaluate_model
 
 def loss_vs_alpha_ort_al2(model1, model2, al_model2, test_dataloader):
     """"
