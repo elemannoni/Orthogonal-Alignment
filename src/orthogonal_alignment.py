@@ -1,4 +1,5 @@
 import torch
+import copy
 
 def Q_min_quadrati(A, B, alpha=False):
     """
