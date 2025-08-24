@@ -1,5 +1,6 @@
 import torch
 from sklearn.metrics import confusion_matrix
+import torch.nn as nn
 import torch.nn.functional as F
 from .orthogonal_alignment import activation_matrix, apply_Q_layerwise
 
