@@ -82,10 +82,11 @@ def misalignment_ReLU(model1, al_model, dataloader, Q_list, linear_layers):
     linear_layers = [i for i, layer in enumerate(model1.fc) if isinstance(layer, torch.nn.Linear)]
 
     for idx, layer_idx in enumerate(linear_layers):
+        layer_idx += 1
         A = activation_matrix(model1, dataloader, layer_idx) 
         B = activation_matrix(al_model, dataloader, layer_idx) 
 
-        Q = Q_list[layer_idx]
+        Q = Q_list[f"fc{layer_idx}"]
         AQ = A @ Q  #applico Q alla matrice di attivazione prima della ReLU
 
         before_reLU = (torch.norm(AQ-B, p = "fro")/A.shape[0])
