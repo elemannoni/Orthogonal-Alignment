@@ -73,7 +73,7 @@ def cycle_consistency_ABC(model_A, model_B, model_C, train_dataloaderA, train_da
         diff = torch.norm(W_ABC - W_AC)
         print(f"Layer {i} ABC vs AC error: {diff.item()}")
 
-def misalignment_ReLU(model1, al_model, dataloader, Q_list, linear_layers):
+def misalignment_ReLU(model1, al_model, dataloader, Q_list):
     model1.eval()
     al_model.eval()
     misalignments = []
