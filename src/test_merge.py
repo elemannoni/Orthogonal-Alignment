@@ -5,7 +5,7 @@ import numpy as np
 def loss_vs_alpha_ort_al2(model1, model2, al_model2, test_dataloader):
     """"
     Confronto dell'interpolazione prima e dopo l'allineamento dei pesi 
-    """"
+    """
     configurations = {
         "lerp": {
             "merge_func": lerp_models, "models": (model1, model2),
