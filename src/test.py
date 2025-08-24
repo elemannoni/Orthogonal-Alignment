@@ -1,6 +1,7 @@
 import torch
 from sklearn.metrics import confusion_matrix
 import torch.nn.functional as F
+from .orthogonal_alignment import activation_matrix
 
 
 def evaluate_model(model, dataloader):
