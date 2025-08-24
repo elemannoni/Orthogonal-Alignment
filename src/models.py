@@ -5,7 +5,11 @@ class MLP_4(nn.Module):
         self.fc = nn.Sequential(
             nn.Linear(30, 1024),
             nn.ReLU(),
-            nn.Linear(1024, 1024),
+            nn.Linear(1024, 2048),
+            nn.ReLU(),
+            nn.Linear(2048, 2048),
+            nn.ReLU(),
+            nn.Linear(2048, 1024),
             nn.ReLU(),
             nn.Linear(1024, 512),
             nn.ReLU(),
